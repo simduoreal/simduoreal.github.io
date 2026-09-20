@@ -1,0 +1,32 @@
+[
+  {
+    "asset": "pregrasp.mp4",
+    "source": "0626689bd73f27e72f6630f458d2f1d6.MP4",
+    "processing": "1280px wide, 30fps, no audio; source timing preserved"
+  },
+  {
+    "asset": "scanning.mp4",
+    "source": "4f5b959bafd03adc59ced3506eae96ba.mov",
+    "processing": "1280px wide, 30fps, no audio; source timing preserved"
+  },
+  {
+    "asset": "cooking.mp4",
+    "source": "98c5742fb4da9464d98c57596777fb4b.MP4",
+    "processing": "1280px wide, 30fps, no audio; source timing preserved"
+  },
+  {
+    "asset": "handover.mp4",
+    "source": "a43d666b80c80b98bb6ac2baf9144e35.MP4",
+    "processing": "1280px wide, 30fps, no audio; source timing preserved"
+  },
+  {
+    "asset": "assembly.mp4",
+    "source": "ac5bc0856bac331bf952cf88830fcf79.mov",
+    "processing": "1280px wide, 30fps, no audio; source timing preserved"
+  },
+  {
+    "asset": "cleaning.mp4",
+    "source": "f890c7f991d6714b35883627e9e3e40a.MP4",
+    "processing": "1280px wide, 30fps, no audio; source timing preserved"
+  }
+]

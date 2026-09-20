@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f7f2">
+  <title>SimDuoReal — Object-Centric Bimanual Policy for Emergent Dexterity</title>
+  <meta name="description" content="One object-centric policy, two dexterous hands. SimDuoReal learns grasping, in-hand manipulation, and handover in simulation and transfers to diverse real-world tasks.">
+  <meta property="og:title" content="SimDuoReal — Emergent Bimanual Dexterity">
+  <meta property="og:description" content="Specify the object's motion. Let the hands discover the coordination.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/assembly.jpg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600&family=Libre+Caslon+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="site-config.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="contents" aria-label="Main navigation">
+    <a class="rail-brand" href="#top"><span class="duo-mark" aria-hidden="true"></span>SimDuoReal</a>
+    <nav aria-label="Sections">
+      <a href="#tasks">Capabilities</a>
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+      <a href="#demo">Demo <span class="nav-soon">soon</span></a>
+    </nav>
+    <a class="rail-paper" href="assets/SimDuoReal.pdf" target="_blank" rel="noopener">Read paper <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main id="main">
+    <header class="hero" id="top">
+      <p class="overline">Object-centric bimanual manipulation</p>
+      <div class="hero-title-row"><div><h1>Sim<span>Duo</span>Real</h1><p class="paper-title">Object-Centric Bimanual Policy<br class="desktop-break"> for Emergent Dexterity</p></div><div class="hero-details"><p class="overline">Research by</p><p class="authors">Anonymous authors</p><div class="resource-links"><a href="assets/SimDuoReal.pdf" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a><span class="unavailable" aria-label="Code coming soon">Code <span class="soon-inline">soon</span></span></div></div></div>
+    </header>
+
+    <section id="overview" class="overview" aria-label="Overview">
+      <figure class="overview-figure">
+        <div class="video-frame hero-video-frame">
+          <video id="overview-video" class="auto-video" src="assets/overview.mp4" poster="assets/assembly.jpg" muted loop playsinline controls preload="metadata" aria-label="Overview montage: assembly, barcode scanning, cleaning, and cooking"></video>
+          <div class="reel-label" aria-hidden="true"><span class="live-dot"></span><span id="reel-task">Assembly</span></div>
+        </div>
+        <figcaption><span>01—04 / Real-world demonstrations</span><span>One policy across all tasks</span></figcaption>
+      </figure>
+      <div class="intro-layout"><p class="overline">The idea</p><div><p class="lead">Specify the object’s motion.<br><em>Let the hands discover the coordination.</em></p><p class="overview-copy">Trained in simulation, SimDuoReal turns object goals into coordinated action. One policy grasps, reorients, and passes unseen objects between hands—without task-specific fine-tuning.</p><div class="resource-links"><a href="#demo">Interactive demo <span class="soon-inline">Coming soon</span></a></div></div></div>
+    </section>
+
+    <section id="tasks" class="section" aria-labelledby="tasks-title">
+      <div class="section-heading"><p class="overline">01 / On real hardware</p><h2 id="tasks-title">One policy, <em>Diverse Tasks</em></h2></div>
+      <p class="section-intro">The same policy handles precise assembly, object handover, and coordinated tool use. Only the desired object motion changes.</p>
+      <div class="task-stage">
+      <div class="task-tabs" role="tablist" aria-label="Real-world tasks" aria-orientation="vertical">
+        <button id="task-assembly" role="tab" aria-controls="task-panel" aria-selected="true" data-task="assembly" type="button"><img src="assets/assembly.jpg" alt="" loading="lazy"><span class="task-option"><small>01 / Precision</small>Assembly</span></button>
+        <button id="task-scanning" role="tab" aria-controls="task-panel" aria-selected="false" tabindex="-1" data-task="scanning" type="button"><img src="assets/scanning.jpg" alt="" loading="lazy"><span class="task-option"><small>02 / Handover</small>Barcode scanning</span></button>
+        <button id="task-cleaning" role="tab" aria-controls="task-panel" aria-selected="false" tabindex="-1" data-task="cleaning" type="button"><img src="assets/cleaning.jpg" alt="" loading="lazy"><span class="task-option"><small>03 / Coordination</small>Cleaning</span></button>
+        <button id="task-cooking" role="tab" aria-controls="task-panel" aria-selected="false" tabindex="-1" data-task="cooking" type="button"><img src="assets/cooking.jpg" alt="" loading="lazy"><span class="task-option"><small>04 / Two-object control</small>Cooking</span></button>
+      </div>
+      <div id="task-panel" role="tabpanel" aria-labelledby="task-assembly">
+        <div class="video-frame"><video id="task-video" src="assets/assembly.mp4" poster="assets/assembly.jpg" controls muted loop playsinline preload="none" aria-label="Real-world peg insertion demonstration"></video></div>
+        <div class="task-detail" aria-live="polite"><div><h3 id="task-title">Two hands, one precise fit.</h3><p id="task-description">Acquire a peg and a block, transfer when needed, then coordinate both hands to align and insert.</p></div><div class="task-score"><strong id="task-count">15<span>/20</span></strong><span>successful trials</span></div></div>
+      </div>
+      </div>
+      <p class="small-note">Real-world evaluation uses operator-provided object goals through VR. The policy controls the arms and hands.</p>
+    </section>
+
+    <section id="demo" class="section demo-section" aria-labelledby="demo-title">
+      <p class="overline">02 / Interactive demo</p>
+      <div class="demo-layout">
+        <div class="demo-copy"><h2 id="demo-title">Explore<br> <em>SimDuoReal.</em></h2><p>An interactive experience is on its way. Explore the project in a dedicated demo, directly in your browser.</p><span id="demo-pending" class="coming-soon"><span></span>Coming soon</span><a id="demo-launch" class="demo-launch" href="#demo" target="_blank" rel="noopener" hidden>Open interactive demo <span aria-hidden="true">↗</span></a></div>
+        <figure class="demo-preview"><img src="assets/handover.jpg" alt="The two robot hands coordinating a brush handover" loading="lazy" width="1280" height="720"><figcaption>From object motion to bimanual coordination.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="dexterity" class="section" aria-labelledby="dexterity-title">
+      <div class="section-heading"><p class="overline">03 / Emergent dexterity</p><h2 id="dexterity-title">Coordination, <em>discovered.</em></h2></div>
+      <p class="section-intro">Grasping, in-hand adjustment, and handover emerge under a shared object-centric objective, without prescribed motion sequences.</p>
+      <div class="behavior-grid">
+        <figure><div class="video-frame"><video data-src="assets/pregrasp.mp4" poster="assets/pregrasp.jpg" controls muted loop playsinline preload="none" aria-label="Pre-grasp manipulation and object acquisition"></video></div><figcaption><span class="behavior-label"><i class="behavior-dot orange"></i>Pre-grasp manipulation</span><h3>Make the object graspable.</h3><p>The hand first adjusts an object on the table, creating a configuration it can grasp.</p></figcaption></figure>
+        <figure><div class="video-frame"><video data-src="assets/handover.mp4" poster="assets/handover.jpg" controls muted loop playsinline preload="none" aria-label="Brush handover and in-hand manipulation"></video></div><figcaption><span class="behavior-label"><i class="behavior-dot teal"></i>Handover & in-hand adjustment</span><h3>Prepare for the other hand.</h3><p>The giver reorients the object to expose a graspable region, then releases it to the receiver.</p></figcaption></figure>
+      </div>
+    </section>
+
+    <section id="method" class="section" aria-labelledby="method-title">
+      <div class="section-heading"><p class="overline">04 / The method</p><h2 id="method-title">From workspace experts<br> to <em>one policy.</em></h2></div>
+      <p class="section-intro">A shared representation and reward, different goal distributions. Specialists learn complementary behaviors before being distilled into a single bimanual policy.</p>
+      <div class="method-tabs" role="tablist" aria-label="Training and deployment stages">
+        <button type="button" id="stage-0" role="tab" aria-selected="true" aria-controls="method-0"><span>01</span>Train experts</button>
+        <button type="button" id="stage-1" role="tab" aria-selected="false" aria-controls="method-1" tabindex="-1"><span>02</span>Refine transitions</button>
+        <button type="button" id="stage-2" role="tab" aria-selected="false" aria-controls="method-2" tabindex="-1"><span>03</span>Unify the policy</button>
+        <button type="button" id="stage-3" role="tab" aria-selected="false" aria-controls="method-3" tabindex="-1"><span>04</span>Deploy</button>
+      </div>
+      <div class="method-panel" id="method-0" role="tabpanel" aria-labelledby="stage-0">
+        <div class="method-diagram" aria-label="Left and right workspace experts and a cross-workspace handover expert share one object-centric reward">
+          <div class="workspace-diagram"><div class="workspace left-workspace"><span>Left workspace</span><b>π<sub>L</sub></b><small>Grasp & reorient</small></div><div class="transfer"><span>Handover</span><b>π<sub>H</sub></b><span class="transfer-arrow" aria-hidden="true">⇄</span></div><div class="workspace right-workspace"><span>Right workspace</span><b>π<sub>R</sub></b><small>Grasp & reorient</small></div></div>
+          <div class="diagram-footer">Shared object-centric representation & reward</div>
+        </div>
+        <div class="method-explanation"><span class="overline">Goal sampling shapes behavior</span><h3>Change the goal.<br> Discover the skill.</h3><p>Within-workspace goals teach each hand to grasp and reorient. Goals across workspaces make handover necessary to complete the task.</p></div>
+      </div>
+      <div class="method-panel" id="method-1" role="tabpanel" aria-labelledby="stage-1" hidden>
+        <div class="method-diagram"><div class="flow-vertical"><div class="expert-row"><span>Left expert</span><span>Handover expert</span><span>Right expert</span></div><span class="flow-arrow" aria-hidden="true">↓</span><div class="flow-box">Pool of terminal states</div><span class="flow-arrow" aria-hidden="true">↓</span><div class="flow-box accent-box">Refine each succeeding expert</div></div><div class="diagram-footer">Learn from where the preceding expert actually ends</div></div>
+        <div class="method-explanation"><span class="overline">Transition-aware refinement</span><h3>Make behaviors<br> fit together.</h3><p>Each expert continues training from states produced by its predecessors, preparing it for the hand and object configurations it will encounter at transitions.</p></div>
+      </div>
+      <div class="method-panel" id="method-2" role="tabpanel" aria-labelledby="stage-2" hidden>
+        <div class="method-diagram"><div class="flow-vertical"><div class="expert-row"><span>π<sub>L</sub></span><span>π<sub>H</sub></span><span>π<sub>R</sub></span></div><span class="flow-arrow" aria-hidden="true">↓</span><div class="distill-label">DAgger + reinforcement learning</div><span class="flow-arrow" aria-hidden="true">↓</span><div class="flow-box accent-box unified-policy">π<sub>U</sub><small>One unified policy</small></div></div><div class="diagram-footer">Individual expert scenes + composition scenes</div></div>
+        <div class="method-explanation"><span class="overline">Unified-policy distillation</span><h3>Three experts.<br> One controller.</h3><p>Distillation preserves specialist behaviors while reinforcement learning helps the unified policy execute transitions and concurrent two-object manipulation.</p></div>
+      </div>
+      <div class="method-panel" id="method-3" role="tabpanel" aria-labelledby="stage-3" hidden>
+        <div class="method-diagram"><div class="flow-vertical"><div class="expert-row"><span>VR object goals</span><span>Human video</span></div><span class="flow-arrow" aria-hidden="true">↓</span><div class="flow-box">Desired 6-DoF object poses</div><span class="flow-arrow" aria-hidden="true">↓</span><div class="flow-box accent-box">One policy → two arms & hands</div></div><div class="diagram-footer">Object pose feedback closes the control loop</div></div>
+        <div class="method-explanation"><span class="overline">Zero-shot sim-to-real</span><h3>Command objects.<br> Coordinate hands.</h3><p>Provide desired object poses through VR or extract waypoints from human video. The policy tracks those goals on real hardware, without task-specific fine-tuning.</p></div>
+      </div>
+      <p class="small-note">Two Franka Research 3 arms · Two 22-DoF Sharpa Wave hands · Policy at 60 Hz</p>
+    </section>
+
+    <section id="results" class="section" aria-labelledby="results-title">
+      <div class="section-heading"><p class="overline">05 / Evaluation</p><h2 id="results-title">Different tasks.<br> <em>The same policy.</em></h2></div>
+      <div class="results-layout">
+        <div class="result-feature"><div class="big-number">76.3<span>%</span></div><h3>Real-world success</h3><p>61 successful trials out of 80.<br> Four tasks. Unseen objects.<br> No task-specific fine-tuning.</p></div>
+        <figure class="results-chart" aria-label="Real-world success: barcode scanning 15 out of 20, peg insertion 15 out of 20, cleaning 16 out of 20, cooking 15 out of 20">
+          <figcaption>Successful trials <span>20 per task</span></figcaption>
+          <div class="result-row"><div><span>Barcode scanning</span><strong>15 / 20</strong></div><div class="bar-track"><span style="width:75%"></span></div></div>
+          <div class="result-row"><div><span>Peg insertion</span><strong>15 / 20</strong></div><div class="bar-track"><span style="width:75%"></span></div></div>
+          <div class="result-row"><div><span>Cleaning</span><strong>16 / 20</strong></div><div class="bar-track"><span style="width:80%"></span></div></div>
+          <div class="result-row"><div><span>Cooking</span><strong>15 / 20</strong></div><div class="bar-track"><span style="width:75%"></span></div></div>
+        </figure>
+      </div>
+      <div class="simulation-results"><div><p class="overline">Controlled simulation benchmark</p><h3>Handover makes a difference.</h3><p>Barcode scanning across 3,072 simulated environments with unseen primitive objects.</p></div><div class="sim-comparison"><div><strong>60.4<span>%</span></strong><span>Two single-arm policies<br> without handover</span></div><span class="comparison-arrow" aria-hidden="true">→</span><div><strong>85.0<span>%</span></strong><span>SimDuoReal<br> unified policy</span></div></div></div>
+      <details class="ablation-details"><summary>View simulation comparisons <span aria-hidden="true">+</span></summary><div class="table-wrap"><table><caption>Simulated barcode scanning. Completion time is over successful episodes (mean ± standard deviation).</caption><thead><tr><th scope="col">Method</th><th scope="col">Success</th><th scope="col">Progress</th><th scope="col">Time (s)</th></tr></thead><tbody><tr><th scope="row">2 × SimToolReal (no handover)</th><td>60.4%</td><td>79.6%</td><td>9.2 ± 4.9</td></tr><tr><th scope="row">Chained experts without refinement</th><td>79.4%</td><td>88.1%</td><td>9.1 ± 4.4</td></tr><tr><th scope="row">Refined expert teachers</th><td>84.3%</td><td>89.8%</td><td>8.7 ± 4.0</td></tr><tr><th scope="row">Unified policy, DAgger only</th><td>81.6%</td><td>89.5%</td><td>9.0 ± 4.2</td></tr><tr><th scope="row">Unified policy, composition scenes only</th><td>68.3%</td><td>84.8%</td><td>8.8 ± 4.4</td></tr><tr class="ours"><th scope="row">SimDuoReal</th><td>85.0%</td><td>90.8%</td><td>8.6 ± 3.9</td></tr></tbody></table></div></details>
+      <p class="small-note">The system assumes known rigid-object meshes and multi-view pose tracking. Desired pose sequences do not directly specify force- or timing-dependent behavior.</p>
+    </section>
+
+    <section id="paper" class="section paper-section" aria-labelledby="paper-heading">
+      <div><p class="overline">06 / Read the research</p><h2 id="paper-heading">SimDuoReal</h2><p class="paper-section-title">Object-Centric Bimanual Policy<br> for Emergent Dexterity</p><p class="authors">Anonymous authors</p><a class="text-link" href="assets/SimDuoReal.pdf" target="_blank" rel="noopener">Read the paper <span aria-hidden="true">↗</span></a></div>
+      <div class="citation"><div class="citation-header"><span class="overline">BibTeX</span><button id="copy-citation" type="button">Copy</button></div><pre id="citation-text">@misc{simduoreal2026,
+  title = {SimDuoReal: Object-Centric Bimanual
+    Policy for Emergent Dexterity},
+  author = {Anonymous},
+  year = {2026}
+}</pre><span id="copy-status" class="sr-only" role="status"></span></div>
+    </section>
+    <footer><a href="#top"><span class="duo-mark" aria-hidden="true"></span>SimDuoReal</a><span>Object motion. Emergent coordination.</span><a class="back-top" href="#top">Back to top ↑</a></footer>
+  </main>
+</body>
+</html>
