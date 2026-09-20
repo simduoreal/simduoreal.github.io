@@ -60,6 +60,64 @@
   const inView = new Set();
   let observerPausing = false;
   const videos = [...document.querySelectorAll('video')];
+  // One speed per section, shared by any companion clips. Reuse the same files.
+  const speedSections = new Map();
+  videos.forEach(video => {
+    const section = video.closest('section');
+    if (!speedSections.has(section)) speedSections.set(section, {rate: 1, videos: [], controls: []});
+    const state = speedSections.get(section);
+    state.videos.push(video);
+    const controls = document.createElement('div');
+    controls.className = 'video-speed-controls';
+    controls.setAttribute('role', 'group');
+    controls.setAttribute('aria-label', 'Section playback speed');
+    const status = document.createElement('span');
+    status.className = 'sr-only';
+    status.setAttribute('role', 'status');
+    for (const rate of [0.5, 1, 2]) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = `${rate}×`;
+      button.dataset.rate = String(rate);
+      button.setAttribute('aria-label', `${rate} times playback speed`);
+      button.setAttribute('aria-pressed', String(rate === state.rate));
+      button.addEventListener('click', () => {
+        state.rate = rate;
+        state.videos.forEach(clip => {
+          clip.defaultPlaybackRate = rate;
+          clip.playbackRate = rate;
+        });
+        updateSpeedControls(state);
+        status.textContent = `Section playback speed: ${rate} times`;
+      });
+      controls.append(button);
+    }
+    controls.append(status);
+    state.controls.push(controls);
+    video.parentElement.append(controls);
+    video.addEventListener('loadedmetadata', () => {
+      video.defaultPlaybackRate = state.rate;
+      video.playbackRate = state.rate;
+    });
+    video.addEventListener('ratechange', () => {
+      // Ignore transient resets while a new source is loading.
+      if (video.readyState === 0 || video.playbackRate === state.rate) return;
+      state.rate = video.playbackRate;
+      state.videos.forEach(clip => {
+        if (clip.defaultPlaybackRate !== state.rate) clip.defaultPlaybackRate = state.rate;
+        if (clip.playbackRate !== state.rate) clip.playbackRate = state.rate;
+      });
+      updateSpeedControls(state);
+    });
+  });
+  function updateSpeedControls(state) {
+    state.controls.forEach(controls => {
+      controls.querySelectorAll('button').forEach(button => {
+        button.setAttribute('aria-pressed', String(Number(button.dataset.rate) === state.rate));
+      });
+    });
+  }
+
   const observer = new IntersectionObserver(entries => {
     entries.forEach(({target: video, isIntersecting}) => {
       if (isIntersecting) {
