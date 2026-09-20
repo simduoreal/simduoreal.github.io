@@ -37,12 +37,13 @@
     const data = taskData[name];
     const changed = !taskVideo.getAttribute('src').endsWith(`/${name}.mp4`);
     if (changed) {
-      taskVideo.pause();
+      pauseAutomatically(taskVideo);
       taskVideo.poster = `assets/${name}.jpg`;
       taskVideo.src = `assets/${name}.mp4`;
       taskVideo.setAttribute('aria-label', data.label);
       taskVideo.load();
-      if (!reducedMotion.matches) taskVideo.play().catch(() => {});
+      manuallyPaused.delete(taskVideo);
+      playWhenVisible(taskVideo);
     }
     document.getElementById('task-title').textContent = data.title;
     document.getElementById('task-description').textContent = data.description;
@@ -54,11 +55,11 @@
     document.querySelectorAll('.method-panel').forEach(panel => { panel.hidden = panel.id !== tab.getAttribute('aria-controls'); });
   });
 
-  // Defer loading lower-page videos; only the small overview starts on its own.
+  // Load and play videos as they enter view, keeping offscreen clips paused.
   const overview = document.getElementById('overview-video');
-  let overviewAutoAllowed = !reducedMotion.matches;
   const inView = new Set();
-  let observerPausing = false;
+  const manuallyPaused = new Set();
+  const automaticPauses = new WeakSet();
   const videos = [...document.querySelectorAll('video')];
   // One speed per section, shared by any companion clips. Reuse the same files.
   const speedSections = new Map();
@@ -118,33 +119,51 @@
     });
   }
 
+  function pauseAutomatically(video) {
+    if (!video.paused) {
+      automaticPauses.add(video);
+      video.pause();
+    }
+  }
+  function playWhenVisible(video) {
+    if (!inView.has(video) || document.hidden || reducedMotion.matches || manuallyPaused.has(video)) return;
+    video.play().then(() => {
+      if (!inView.has(video) || document.hidden || reducedMotion.matches) pauseAutomatically(video);
+    }).catch(() => {}); // Browser autoplay restrictions leave native controls available.
+  }
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(({target: video, isIntersecting}) => {
-      if (isIntersecting) {
+    entries.forEach(({target: video, isIntersecting, intersectionRatio}) => {
+      if (isIntersecting && intersectionRatio >= 0.15) {
         inView.add(video);
         if (video.dataset.src) { video.src = video.dataset.src; delete video.dataset.src; video.load(); }
-        if (video === overview && overviewAutoAllowed && !document.hidden) video.play().catch(() => {});
+        playWhenVisible(video);
       } else {
         inView.delete(video);
-        observerPausing = true;
-        video.pause();
-        observerPausing = false;
+        pauseAutomatically(video);
       }
     });
   }, {threshold: 0.15});
   videos.forEach(video => {
+    video.muted = true;
+    video.playsInline = true;
+    video.addEventListener('pause', () => {
+      if (automaticPauses.delete(video)) return;
+      if (inView.has(video) && !document.hidden && !reducedMotion.matches) manuallyPaused.add(video);
+    });
+    video.addEventListener('play', () => { manuallyPaused.delete(video); });
     observer.observe(video);
-    video.addEventListener('play', () => { videos.forEach(other => { if (other !== video) other.pause(); }); });
-  });
-  // A user pause remains paused when the overview scrolls back into view.
-  overview.addEventListener('pause', () => {
-    if (!observerPausing && inView.has(overview) && !document.hidden) overviewAutoAllowed = false;
   });
   overview.addEventListener('timeupdate', () => {
     document.getElementById('reel-task').textContent = ['Assembly', 'Barcode scanning', 'Cleaning', 'Cooking'][Math.min(3, Math.floor(overview.currentTime / 5))];
   });
-  reducedMotion.addEventListener('change', () => { overviewAutoAllowed = !reducedMotion.matches; if (reducedMotion.matches) overview.pause(); });
-  document.addEventListener('visibilitychange', () => { if (document.hidden) videos.forEach(video => video.pause()); });
+  function syncPlayback() {
+    videos.forEach(video => {
+      if (document.hidden || reducedMotion.matches) pauseAutomatically(video);
+      else playWhenVisible(video);
+    });
+  }
+  reducedMotion.addEventListener('change', syncPlayback);
+  document.addEventListener('visibilitychange', syncPlayback);
 
   const sectionLinks = [...document.querySelectorAll('.contents nav a')];
   const sections = sectionLinks.map(link => document.querySelector(link.getAttribute('href'))).sort((a, b) => a.offsetTop - b.offsetTop);
