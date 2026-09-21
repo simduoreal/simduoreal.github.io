@@ -289,7 +289,7 @@
   const mainNav = document.querySelector('.contents');
   let dexterityScheduled = false;
   function updateDexterityNavigation() {
-    const threshold = window.innerHeight / 2 + 1;
+    const threshold = window.innerHeight / 3 + 1;
     let active = dexterityHeadings[0];
     dexterityHeadings.forEach(heading => {
       if (heading.getBoundingClientRect().top <= threshold) active = heading;
@@ -305,7 +305,7 @@
     dexterityNav.style.setProperty('--main-nav-height', `${height}px`);
     const pagePadding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
     dexterityHeadings.forEach(heading => {
-      heading.style.scrollMarginTop = `${Math.max(0, window.innerHeight / 2 - heading.getBoundingClientRect().height / 2 - pagePadding)}px`;
+      heading.style.scrollMarginTop = `${Math.max(0, window.innerHeight / 3 - pagePadding)}px`;
     });
     updateDexterityNavigation();
   }

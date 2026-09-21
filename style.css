@@ -135,3 +135,22 @@ footer>a{display:flex;align-items:center;gap:8px}footer>a span{margin:0}.back-to
 .dexterity-nav a[aria-current]{color:var(--teal);background:var(--paper);box-shadow:0 1px 4px #292e2914}
 .dexterity-nav a:focus-visible{outline-offset:1px}
 @media(max-width:540px){.dexterity-nav{gap:0;width:100%}.dexterity-nav a{flex:1;min-width:0;padding:0 8px;font-size:11px;min-height:44px}}
+
+/* A quieter research-page treatment, retaining the existing layout. */
+.section-heading h2,.demo-copy h2,.paper-section h2{font-family:var(--sans);font-size:34px;line-height:1.25;font-weight:500;letter-spacing:-.7px}
+h2 em,.intro-layout .lead em{font-style:normal;color:inherit}
+.hero h1{font-size:76px;letter-spacing:-2.5px}
+.paper-title{font-family:var(--sans);font-size:28px;line-height:1.35;letter-spacing:-.4px}
+.overline{letter-spacing:1px}
+.intro-layout .lead{font-family:var(--sans);font-size:27px;line-height:1.4;letter-spacing:-.4px}
+.task-detail h3,.method-explanation h3,.result-feature h3,.simulation-results h3{font-family:var(--sans);font-size:22px;line-height:1.35;font-weight:500;letter-spacing:-.3px}
+.dexterity-group-heading h3{font-family:var(--sans);font-size:22px;line-height:1.35;font-weight:500;letter-spacing:-.3px}
+.dexterity-context>p:not(.overline){font-family:var(--sans);font-size:19px;line-height:1.6;letter-spacing:0}
+.dexterity-context>p.dexterity-context-note{font-size:13px}
+.resource-links>a,.resource-links>.unavailable{font-family:var(--sans)}
+.dexterity-nav,.dexterity-nav a[aria-current]{box-shadow:none}
+.dexterity-nav{background:#eef0ea}
+.big-number{font-family:var(--sans);font-size:76px;font-weight:500;letter-spacing:-3px}
+.sim-comparison strong{font-family:var(--sans);font-size:40px;letter-spacing:-1px}
+@media(max-width:760px){.hero h1{font-size:66px}.paper-title{font-size:25px}.section-heading h2,.demo-copy h2,.paper-section h2{font-size:30px}.intro-layout .lead{font-size:24px}.dexterity-group-heading h3{font-size:20px}}
+@media(max-width:540px){.hero h1{font-size:56px;letter-spacing:-2px}.paper-title{font-size:23px}.section-heading h2,.demo-copy h2,.paper-section h2{font-size:27px}.intro-layout .lead{font-size:22px}.dexterity-group-heading h3{font-size:18px}.task-detail h3,.method-explanation h3{font-size:20px}.big-number{font-size:64px}}
