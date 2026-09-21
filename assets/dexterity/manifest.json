@@ -1,0 +1,83 @@
+[
+  {
+    "asset": "dexterity/handover-adjustment.mp4",
+    "poster": "dexterity/handover-adjustment.jpg",
+    "slide": 28,
+    "source": "ihm in ho.mp4",
+    "start_seconds": 26.127511978149414,
+    "end_seconds": 38.20892333984375,
+    "crop": null
+  },
+  {
+    "asset": "dexterity/coordination-assembly.mp4",
+    "poster": "dexterity/coordination-assembly.jpg",
+    "slide": 29,
+    "source": "Data/0626689bd73f27e72f6630f458d2f1d6-16197.MP4",
+    "start_seconds": 6.087955474853516,
+    "end_seconds": 10.793389320373535,
+    "crop": null
+  },
+  {
+    "asset": "dexterity/coordination-cooking.mp4",
+    "poster": "dexterity/coordination-cooking.jpg",
+    "slide": 29,
+    "source": "Data/98c5742fb4da9464d98c57596777fb4b-16199.MP4",
+    "start_seconds": 20.167421340942383,
+    "end_seconds": 28.520000457763672,
+    "crop": null
+  },
+  {
+    "asset": "dexterity/coordination-cleaning.mp4",
+    "poster": "dexterity/coordination-cleaning.jpg",
+    "slide": 29,
+    "source": "Data/a43d666b80c80b98bb6ac2baf9144e35-16201.MP4",
+    "start_seconds": 21.15999984741211,
+    "end_seconds": 28.360000610351562,
+    "crop": null
+  },
+  {
+    "asset": "dexterity/regrasp-unstable.mp4",
+    "poster": "dexterity/regrasp-unstable.jpg",
+    "slide": 30,
+    "source": "clean_ho_regrasp.MP4",
+    "start_seconds": 3.7662222385406494,
+    "end_seconds": 7.655233383178711,
+    "crop": null
+  },
+  {
+    "asset": "dexterity/regrasp-recovery.mp4",
+    "poster": "dexterity/regrasp-recovery.jpg",
+    "slide": 30,
+    "source": "barcode/barcode_regrasp.MP4",
+    "start_seconds": 8.39486026763916,
+    "end_seconds": 15.375711441040039,
+    "crop": null
+  },
+  {
+    "asset": "dexterity/pregrasp-1.mp4",
+    "poster": "dexterity/pregrasp-1.jpg",
+    "slide": 31,
+    "source": "barcode/barcode_1.MP4",
+    "start_seconds": 8.969277381896973,
+    "end_seconds": 11.80014419555664,
+    "crop": "right 60% of frame"
+  },
+  {
+    "asset": "dexterity/pregrasp-2.mp4",
+    "poster": "dexterity/pregrasp-2.jpg",
+    "slide": 31,
+    "source": "barcode/barcode_2.MP4",
+    "start_seconds": 1.0130666494369507,
+    "end_seconds": 6.910639762878418,
+    "crop": "right 60% of frame"
+  },
+  {
+    "asset": "dexterity/pregrasp-3.mp4",
+    "poster": "dexterity/pregrasp-3.jpg",
+    "slide": 31,
+    "source": "barcode/barcode_3.MP4",
+    "start_seconds": 0.0,
+    "end_seconds": 5.732577800750732,
+    "crop": "right 60% of frame"
+  }
+]

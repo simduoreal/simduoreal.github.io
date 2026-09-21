@@ -61,6 +61,108 @@
   const manuallyPaused = new Set();
   const automaticPauses = new WeakSet();
   const videos = [...document.querySelectorAll('video')];
+  // Reveal controls on interaction, never just because autoplay starts.
+  videos.forEach(video => {
+    const frame = video.closest('.video-frame');
+    video.tabIndex = 0;
+    video.controls = false;
+    frame.classList.add('custom-player');
+    const playback = document.createElement('div');
+    playback.className = 'video-playback-controls';
+    playback.setAttribute('role', 'group');
+    playback.setAttribute('aria-label', 'Video playback');
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'video-play-toggle';
+    const seek = document.createElement('input');
+    seek.type = 'range';
+    seek.className = 'video-seek';
+    seek.min = '0';
+    seek.max = '0';
+    seek.step = '0.01';
+    seek.value = '0';
+    seek.disabled = true;
+    seek.setAttribute('aria-label', 'Video position');
+    const time = document.createElement('span');
+    time.className = 'video-time';
+    time.setAttribute('aria-hidden', 'true');
+    const formatTime = seconds => {
+      const value = Number.isFinite(seconds) ? Math.max(0, Math.floor(seconds)) : 0;
+      return `${Math.floor(value / 60)}:${String(value % 60).padStart(2, '0')}`;
+    };
+    const syncControls = () => {
+      const duration = Number.isFinite(video.duration) ? video.duration : 0;
+      toggle.setAttribute('aria-label', video.paused ? 'Play video' : 'Pause video');
+      toggle.innerHTML = video.paused
+        ? '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 3.5 16 10 6 16.5Z" fill="currentColor"/></svg>'
+        : '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4v12M14 4v12" stroke="currentColor" stroke-width="3"/></svg>';
+      seek.disabled = duration <= 0;
+      seek.max = String(duration);
+      seek.value = String(video.currentTime);
+      seek.style.setProperty('--progress', `${duration ? video.currentTime / duration * 100 : 0}%`);
+      seek.setAttribute('aria-valuetext', `${formatTime(video.currentTime)} of ${formatTime(duration)}`);
+      time.textContent = `${formatTime(video.currentTime)} / ${formatTime(duration)}`;
+    };
+    const togglePlayback = () => {
+      if (video.paused) {
+        if (video.dataset.src) { video.src = video.dataset.src; delete video.dataset.src; video.load(); }
+        video.play().catch(() => {});
+      } else video.pause();
+    };
+    toggle.addEventListener('click', togglePlayback);
+    seek.addEventListener('input', () => {
+      if (Number.isFinite(video.duration)) video.currentTime = Number(seek.value);
+      syncControls();
+    });
+    video.addEventListener('keydown', event => {
+      if (event.key === ' ' || event.key === 'Enter') { event.preventDefault(); togglePlayback(); }
+    });
+    for (const event of ['play', 'pause', 'timeupdate', 'loadedmetadata', 'durationchange', 'emptied']) video.addEventListener(event, syncControls);
+    playback.append(toggle, seek, time);
+    frame.append(playback);
+    syncControls();
+    let hovering = false;
+    let keyboardFocus = false;
+    let touchActive = false;
+    const updateControls = () => {
+      const visible = hovering || keyboardFocus || touchActive;
+      video.controls = false;
+      frame.classList.toggle('controls-visible', visible);
+    };
+    frame.addEventListener('pointerenter', event => {
+      if (event.pointerType === 'mouse' || event.pointerType === 'pen') hovering = true;
+      updateControls();
+    });
+    frame.addEventListener('pointerleave', () => { hovering = false; updateControls(); });
+    frame.addEventListener('pointerdown', event => {
+      keyboardFocus = false;
+      if (event.pointerType === 'touch') touchActive = true;
+      updateControls();
+    });
+    frame.addEventListener('focusin', event => {
+      if (event.target.matches(':focus-visible')) keyboardFocus = true;
+      updateControls();
+    });
+    frame.addEventListener('focusout', () => {
+      // Wait for focus to reach the next control before hiding the toolbar.
+      requestAnimationFrame(() => {
+        if (!frame.contains(document.activeElement)) keyboardFocus = false;
+        updateControls();
+      });
+    });
+    frame.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        hovering = false;
+        keyboardFocus = false;
+        touchActive = false;
+      } else keyboardFocus = true;
+      updateControls();
+    });
+    document.addEventListener('pointerdown', event => {
+      if (!frame.contains(event.target)) { touchActive = false; updateControls(); }
+    });
+    updateControls();
+  });
   // One speed per section, shared by any companion clips. Reuse the same files.
   const speedSections = new Map();
   videos.forEach(video => {
@@ -180,6 +282,39 @@
   }
   window.addEventListener('scroll', () => { if (!scheduled) { scheduled = true; requestAnimationFrame(updateNavigation); } }, {passive: true});
   updateNavigation();
+
+  const dexterityNav = document.querySelector('.dexterity-nav');
+  const dexterityLinks = [...dexterityNav.querySelectorAll('a')];
+  const dexterityHeadings = dexterityLinks.map(link => document.querySelector(link.getAttribute('href')));
+  const mainNav = document.querySelector('.contents');
+  let dexterityScheduled = false;
+  function updateDexterityNavigation() {
+    const threshold = window.innerHeight / 2 + 1;
+    let active = dexterityHeadings[0];
+    dexterityHeadings.forEach(heading => {
+      if (heading.getBoundingClientRect().top <= threshold) active = heading;
+    });
+    dexterityLinks.forEach(link => {
+      if (link.hash === `#${active.id}`) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    dexterityScheduled = false;
+  }
+  function sizeDexterityNavigation() {
+    const height = mainNav.getBoundingClientRect().height;
+    dexterityNav.style.setProperty('--main-nav-height', `${height}px`);
+    const pagePadding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    dexterityHeadings.forEach(heading => {
+      heading.style.scrollMarginTop = `${Math.max(0, window.innerHeight / 2 - heading.getBoundingClientRect().height / 2 - pagePadding)}px`;
+    });
+    updateDexterityNavigation();
+  }
+  new ResizeObserver(sizeDexterityNavigation).observe(mainNav);
+  window.addEventListener('resize', sizeDexterityNavigation);
+  window.addEventListener('scroll', () => {
+    if (!dexterityScheduled) { dexterityScheduled = true; requestAnimationFrame(updateDexterityNavigation); }
+  }, {passive: true});
+  sizeDexterityNavigation();
 
   const copyButton = document.getElementById('copy-citation');
   copyButton.addEventListener('click', async () => {
