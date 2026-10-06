@@ -14,18 +14,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600&family=Libre+Caslon+Display&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=research-style-1">
+  <link rel="stylesheet" href="style.css?v=combined-handover-2">
   <script src="site-config.js" defer></script>
-  <script src="script.js?v=dexterity-capsule-4" defer></script>
+  <script src="script.js?v=teaser-v7" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="contents" aria-label="Main navigation">
     <a class="rail-brand" href="#top"><span class="duo-mark" aria-hidden="true"></span>SimDuoReal</a>
     <nav aria-label="Sections">
-      <a href="#tasks">Capabilities</a>
+      <a href="#tasks">Tasks</a>
       <a href="#dexterity">Dexterity</a>
-      <a href="#demo">Demo <span class="nav-soon">soon</span></a>
+      <a href="#demo">Demo <span class="nav-soon">Coming soon</span></a>
       <a href="#method">Method</a>
       <a href="#results">Results</a>
     </nav>
@@ -34,33 +34,33 @@
   <main id="main">
     <header class="hero" id="top">
       <p class="overline">Object-centric bimanual manipulation</p>
-      <div class="hero-title-row"><div><h1>Sim<span>Duo</span>Real</h1><p class="paper-title">Object-Centric Bimanual Policy<br class="desktop-break"> for Emergent Dexterity</p></div><div class="hero-details"><p class="overline">Research by</p><p class="authors">Anonymous authors</p><div class="resource-links"><span class="unavailable" aria-label="Code coming soon">Code <span class="soon-inline">soon</span></span></div></div></div>
+      <div class="hero-title-row"><div><h1>Sim<span>Duo</span>Real</h1><p class="paper-title">Object-Centric Bimanual Policy<br class="desktop-break"> for Emergent Dexterity</p></div><div class="hero-details"><p class="overline">Research by</p><p class="authors">Anonymous authors</p><div class="resource-links"><span class="unavailable" aria-label="Code coming soon">Code <span class="soon-inline">Coming soon</span></span><a href="#demo">Interactive demo <span class="soon-inline">Coming soon</span></a></div></div></div>
     </header>
 
     <section id="overview" class="overview" aria-label="Overview">
       <figure class="overview-figure">
         <div class="video-frame hero-video-frame">
-          <video id="overview-video" class="auto-video" src="assets/overview.mp4" poster="assets/assembly.jpg" muted loop playsinline controls preload="metadata" aria-label="Overview montage: assembly, barcode scanning, cleaning, and cooking"></video>
-          <div class="reel-label" aria-hidden="true"><span class="live-dot"></span><span id="reel-task">Assembly</span></div>
+          <video id="overview-video" class="auto-video" data-fixed-speed="true" data-src="assets/overview.mp4?v=teaser-v7" poster="assets/overview.jpg" muted loop playsinline controls preload="none" aria-label="Teaser: barcode scanning, assembly handover and insertion, cleaning handover and sweeping, and cooking"></video>
         </div>
         <figcaption><span>01—04 / Real-world demonstrations</span><span>One policy across all tasks</span></figcaption>
       </figure>
-      <div class="intro-layout"><p class="overline">The idea</p><div><p class="lead">Specify the object’s motion.<br><em>Let the hands discover the coordination.</em></p><p class="overview-copy">Trained in simulation, SimDuoReal turns object goals into coordinated action. One policy grasps, reorients, and passes unseen objects between hands—without task-specific fine-tuning.</p><div class="resource-links"><a href="#demo">Interactive demo <span class="soon-inline">Coming soon</span></a></div></div></div>
+      <div class="intro-layout"><p class="overline">The idea</p><div><p class="lead">Specify the object’s motion.<br><em>Let the hands discover the coordination.</em></p><p class="overview-copy">Trained in simulation, SimDuoReal turns object goals into coordinated action. One policy grasps, reorients, and passes unseen objects between hands—without task-specific fine-tuning.</p></div></div>
     </section>
 
     <section id="tasks" class="section" aria-labelledby="tasks-title">
-      <div class="section-heading"><p class="overline">01 / On real hardware</p><h2 id="tasks-title">One policy, <em>Diverse Tasks</em></h2></div>
+      <div class="section-heading"><p class="overline">01 / On real hardware</p><h2 id="tasks-title">One Policy, Diverse Tasks, Unseen Objects</h2></div>
       <p class="section-intro">The same policy handles precise assembly, object handover, and coordinated tool use. Only the desired object motion changes.</p>
       <div class="task-stage">
       <div class="task-tabs" role="tablist" aria-label="Real-world tasks" aria-orientation="vertical">
-        <button id="task-assembly" role="tab" aria-controls="task-panel" aria-selected="true" data-task="assembly" type="button"><img src="assets/assembly.jpg" alt="" loading="lazy"><span class="task-option"><small>01 / Precision</small>Assembly</span></button>
-        <button id="task-scanning" role="tab" aria-controls="task-panel" aria-selected="false" tabindex="-1" data-task="scanning" type="button"><img src="assets/scanning.jpg" alt="" loading="lazy"><span class="task-option"><small>02 / Handover</small>Barcode scanning</span></button>
-        <button id="task-cleaning" role="tab" aria-controls="task-panel" aria-selected="false" tabindex="-1" data-task="cleaning" type="button"><img src="assets/cleaning.jpg" alt="" loading="lazy"><span class="task-option"><small>03 / Coordination</small>Cleaning</span></button>
+        <button id="task-scanning" role="tab" aria-controls="task-panel" aria-selected="true" data-task="scanning" type="button"><img src="assets/scanning.jpg" alt="" loading="lazy"><span class="task-option"><small>01 / Handover</small>Barcode scanning<strong class="task-video-count">6 object demos <span aria-hidden="true">→</span></strong></span></button>
+        <button id="task-assembly" role="tab" aria-controls="task-panel" aria-selected="false" tabindex="-1" data-task="assembly" type="button"><img src="assets/assembly-different.jpg" alt="" loading="lazy"><span class="task-option"><small>02 / Precision</small>Assembly</span></button>
+        <button id="task-cleaning" role="tab" aria-controls="task-panel" aria-selected="false" tabindex="-1" data-task="cleaning" type="button"><img src="assets/cleaning-different.jpg" alt="" loading="lazy"><span class="task-option"><small>03 / Coordination</small>Cleaning</span></button>
         <button id="task-cooking" role="tab" aria-controls="task-panel" aria-selected="false" tabindex="-1" data-task="cooking" type="button"><img src="assets/cooking.jpg" alt="" loading="lazy"><span class="task-option"><small>04 / Two-object control</small>Cooking</span></button>
       </div>
-      <div id="task-panel" role="tabpanel" aria-labelledby="task-assembly">
-        <div class="video-frame"><video id="task-video" src="assets/assembly.mp4" poster="assets/assembly.jpg" controls muted loop playsinline preload="none" aria-label="Real-world peg insertion demonstration"></video></div>
-        <div class="task-detail" aria-live="polite"><div><h3 id="task-title">Two hands, one precise fit.</h3><p id="task-description">Acquire a peg and a block, transfer when needed, then coordinate both hands to align and insert.</p></div><div class="task-score"><strong id="task-count">15<span>/20</span></strong><span>successful trials</span></div></div>
+      <div id="task-panel" role="tabpanel" aria-labelledby="task-scanning">
+        <div id="barcode-objects" class="barcode-objects"><span class="object-label" id="barcode-object-label" aria-live="polite" aria-atomic="true">Video 1 of 6 · Black brush</span><span class="object-hint" id="barcode-object-hint">Select another object</span><div class="object-options" role="group" aria-label="Barcode scanning objects" aria-describedby="barcode-object-hint"><button type="button" data-object="brush" aria-pressed="true" aria-controls="task-video">Black brush</button><button type="button" data-object="clamp" aria-pressed="false" aria-controls="task-video">Folded tripod</button><button type="button" data-object="can" aria-pressed="false" aria-controls="task-video">Can</button><button type="button" data-object="bottle" aria-pressed="false" aria-controls="task-video">Tennis ball tube</button><button type="button" data-object="sponge-1" aria-pressed="false" aria-controls="task-video">Yellow brush 1</button><button type="button" data-object="sponge-2" aria-pressed="false" aria-controls="task-video">Yellow brush 2</button></div></div>
+        <div class="video-frame"><video id="task-video" src="assets/barcode/brush.mp4" poster="assets/barcode/brush.jpg" controls muted loop playsinline preload="none" aria-label="Barcode scanning: Black brush"></video></div>
+        <div class="task-detail" aria-live="polite"><div><h3 id="task-title">Bring the barcode into view.</h3><p id="task-description">Pick up and reorient different objects to present their barcodes to the scanner.</p></div><div class="task-score"><strong id="task-count">15<span>/20</span></strong><span>successful trials</span></div></div>
       </div>
       </div>
       <p class="small-note">Real-world evaluation uses operator-provided object goals through VR. The policy controls the arms and hands.</p>
@@ -68,32 +68,22 @@
 
     <section id="dexterity" class="section" aria-labelledby="dexterity-title">
       <div class="section-heading"><p class="overline">02 / Emergent dexterity</p><h2 id="dexterity-title">Emergent dexterity</h2></div>
-      <p class="section-intro">Grasping, in-hand adjustment, and handover emerge under a shared object-centric objective, without prescribed motion sequences.</p>
+      <p class="section-intro">The following behaviors emerge from a shared object-centric objective, without prescribed motion sequences.</p>
       <nav class="dexterity-nav" aria-label="Dexterity subsections">
-        <a href="#dexterity-handover">Handover</a>
-        <a href="#dexterity-coordination">Coordination</a>
+        <a href="#dexterity-handover">Handover &amp; in-hand manipulation</a>
         <a href="#dexterity-regrasping">Regrasping</a>
         <a href="#dexterity-pregrasp">Pre-grasp</a>
       </nav>
       <div class="dexterity-collection">
         <div class="dexterity-group" aria-labelledby="dexterity-handover">
-          <div class="dexterity-group-heading"><span class="dexterity-index">01</span><h3 id="dexterity-handover">In-hand manipulation &amp; handover</h3><span class="dexterity-count">1 clip</span></div>
+          <div class="dexterity-group-heading"><span class="dexterity-index">01</span><h3 id="dexterity-handover">Handover &amp; in-hand manipulation</h3><span class="dexterity-count">1 clip</span></div>
           <div class="dexterity-feature">
-            <figure class="dexterity-clip"><div class="video-frame"><video data-src="assets/dexterity/handover-adjustment.mp4" poster="assets/dexterity/handover-adjustment.jpg" controls muted loop playsinline preload="none" aria-label="Adjusting the grasp through a handover"></video></div><figcaption><h4>Adjusting the grasp through a handover</h4></figcaption></figure>
+            <figure class="dexterity-clip"><div class="video-frame"><video data-source-speed="0.5" data-src="assets/dexterity/handover-adjustment.mp4" poster="assets/dexterity/handover-adjustment.jpg" controls muted loop playsinline preload="none" aria-label="Adjusting the grasp through a handover"></video></div><figcaption><h4>Adjusting the grasp through a handover</h4></figcaption></figure>
             <div class="dexterity-context"><p class="overline">Before · During · After</p><p>The hands adjust the brush’s orientation before, during, and after the transfer.</p><p class="dexterity-context-note">In-hand manipulation and handover form one continuous sequence.</p></div>
           </div>
         </div>
-        <div class="dexterity-group" aria-labelledby="dexterity-coordination">
-          <div class="dexterity-group-heading"><span class="dexterity-index">02</span><h3 id="dexterity-coordination">Bimanual coordination</h3><span class="dexterity-count">3 clips</span></div>
-          <p class="dexterity-description">Two hands take complementary roles across different tasks.</p>
-          <div class="dexterity-grid">
-            <figure class="dexterity-clip"><div class="video-frame"><video data-src="assets/dexterity/coordination-assembly.mp4" poster="assets/dexterity/coordination-assembly.jpg" controls muted loop playsinline preload="none" aria-label="Assembly"></video></div><figcaption><h4>Assembly</h4></figcaption></figure>
-            <figure class="dexterity-clip"><div class="video-frame"><video data-src="assets/dexterity/coordination-cooking.mp4" poster="assets/dexterity/coordination-cooking.jpg" controls muted loop playsinline preload="none" aria-label="Cooking"></video></div><figcaption><h4>Cooking</h4></figcaption></figure>
-            <figure class="dexterity-clip"><div class="video-frame"><video data-src="assets/dexterity/coordination-cleaning.mp4" poster="assets/dexterity/coordination-cleaning.jpg" controls muted loop playsinline preload="none" aria-label="Cleaning"></video></div><figcaption><h4>Cleaning</h4></figcaption></figure>
-          </div>
-        </div>
         <div class="dexterity-group" aria-labelledby="dexterity-regrasping">
-          <div class="dexterity-group-heading"><span class="dexterity-index">03</span><h3 id="dexterity-regrasping">Regrasping</h3><span class="dexterity-count">2 clips</span></div>
+          <div class="dexterity-group-heading"><span class="dexterity-index">02</span><h3 id="dexterity-regrasping">Regrasping</h3><span class="dexterity-count">2 clips</span></div>
           <p class="dexterity-description">A new grasp lets the policy recover when a transfer does not go as intended.</p>
           <div class="dexterity-grid dexterity-grid-pair">
             <figure class="dexterity-clip"><div class="video-frame"><video data-src="assets/dexterity/regrasp-unstable.mp4" poster="assets/dexterity/regrasp-unstable.jpg" controls muted loop playsinline preload="none" aria-label="Recovering from an unstable handover"></video></div><figcaption><h4>Recovering from an unstable handover</h4></figcaption></figure>
@@ -101,12 +91,10 @@
           </div>
         </div>
         <div class="dexterity-group dexterity-pregrasp" aria-labelledby="dexterity-pregrasp">
-          <div class="dexterity-group-heading"><span class="dexterity-index">04</span><h3 id="dexterity-pregrasp">Pre-grasp manipulation</h3><span class="dexterity-count">3 clips</span></div>
-          <p class="dexterity-description">Reorienting the object on the table makes it graspable from different initial poses.</p>
-          <div class="dexterity-grid">
-            <figure class="dexterity-clip"><div class="video-frame"><video data-src="assets/dexterity/pregrasp-1.mp4" poster="assets/dexterity/pregrasp-1.jpg" controls muted loop playsinline preload="none" aria-label="Initial pose 01"></video></div><figcaption><h4>Initial pose 01</h4></figcaption></figure>
-            <figure class="dexterity-clip"><div class="video-frame"><video data-src="assets/dexterity/pregrasp-2.mp4" poster="assets/dexterity/pregrasp-2.jpg" controls muted loop playsinline preload="none" aria-label="Initial pose 02"></video></div><figcaption><h4>Initial pose 02</h4></figcaption></figure>
-            <figure class="dexterity-clip"><div class="video-frame"><video data-src="assets/dexterity/pregrasp-3.mp4" poster="assets/dexterity/pregrasp-3.jpg" controls muted loop playsinline preload="none" aria-label="Initial pose 03"></video></div><figcaption><h4>Initial pose 03</h4></figcaption></figure>
+          <div class="dexterity-group-heading"><span class="dexterity-index">03</span><h3 id="dexterity-pregrasp">Pre-grasp manipulation</h3><span class="dexterity-count">1 clip</span></div>
+          <p class="dexterity-description">Reorienting the object on the table prepares it for grasping.</p>
+          <div class="dexterity-grid dexterity-grid-single">
+            <figure class="dexterity-clip"><div class="video-frame"><video data-src="assets/dexterity/pregrasp-manipulation.mp4" poster="assets/dexterity/pregrasp-manipulation.jpg" controls muted loop playsinline preload="none" width="1280" height="720" aria-label="Pre-grasp manipulation of a brush"></video></div><figcaption><h4>Reorienting the brush before grasping</h4></figcaption></figure>
           </div>
         </div>
       </div>
@@ -121,34 +109,47 @@
     </section>
 
     <section id="method" class="section" aria-labelledby="method-title">
-      <div class="section-heading"><p class="overline">04 / The method</p><h2 id="method-title">Training and deployment</h2></div>
-      <p class="section-intro">A shared representation and reward, different goal distributions. Specialists learn complementary behaviors before being distilled into a single bimanual policy.</p>
+      <div class="section-heading"><p class="overline">04 / The method</p><h2 id="method-title">Learning one bimanual policy</h2></div>
+      <p class="section-intro">Train workspace experts, refine their transitions, and distill one policy that follows object trajectories.</p>
       <div class="method-tabs" role="tablist" aria-label="Training and deployment stages">
-        <button type="button" id="stage-0" role="tab" aria-selected="true" aria-controls="method-0"><span>01</span>Train experts</button>
-        <button type="button" id="stage-1" role="tab" aria-selected="false" aria-controls="method-1" tabindex="-1"><span>02</span>Refine transitions</button>
-        <button type="button" id="stage-2" role="tab" aria-selected="false" aria-controls="method-2" tabindex="-1"><span>03</span>Unify the policy</button>
-        <button type="button" id="stage-3" role="tab" aria-selected="false" aria-controls="method-3" tabindex="-1"><span>04</span>Deploy</button>
+        <button type="button" id="stage-0" role="tab" aria-selected="true" aria-controls="method-0"><span>01</span>Workspace experts</button>
+        <button type="button" id="stage-1" role="tab" aria-selected="false" aria-controls="method-1" tabindex="-1"><span>02</span>Expert refinement</button>
+        <button type="button" id="stage-2" role="tab" aria-selected="false" aria-controls="method-2" tabindex="-1"><span>03</span>Policy distillation</button>
+        <button type="button" id="stage-3" role="tab" aria-selected="false" aria-controls="method-3" tabindex="-1"><span>04</span>Object commands</button>
       </div>
-      <div class="method-panel" id="method-0" role="tabpanel" aria-labelledby="stage-0">
-        <div class="method-diagram" aria-label="Left and right workspace experts and a cross-workspace handover expert share one object-centric reward">
-          <div class="workspace-diagram"><div class="workspace left-workspace"><span>Left workspace</span><b>π<sub>L</sub></b><small>Grasp & reorient</small></div><div class="transfer"><span>Handover</span><b>π<sub>H</sub></b><span class="transfer-arrow" aria-hidden="true">⇄</span></div><div class="workspace right-workspace"><span>Right workspace</span><b>π<sub>R</sub></b><small>Grasp & reorient</small></div></div>
-          <div class="diagram-footer">Shared object-centric representation & reward</div>
+      <div class="method-panel expert-training" id="method-0" role="tabpanel" aria-labelledby="stage-0">
+        <div class="expert-training-intro"><h3>Learn through goal sampling</h3><ul class="method-points"><li><strong>Shared formulation:</strong> object-centric representation and reward.</li><li><strong>Within-workspace goals:</strong> grasping and in-hand adjustment.</li><li><strong>Cross-workspace goals:</strong> handover.</li></ul></div>
+        <p class="small-note workspace-note">The blue box marks the workspace in each video.</p>
+        <div class="expert-tabs" role="tablist" aria-label="Simulation experts">
+          <button type="button" id="expert-tab-left" role="tab" aria-selected="true" aria-controls="expert-panel-left" tabindex="0">Left workspace</button>
+          <button type="button" id="expert-tab-handover" role="tab" aria-selected="false" aria-controls="expert-panel-handover" tabindex="-1">Cross-workspace</button>
+          <button type="button" id="expert-tab-right" role="tab" aria-selected="false" aria-controls="expert-panel-right" tabindex="-1">Right workspace</button>
         </div>
-        <div class="method-explanation"><span class="overline">Goal sampling shapes behavior</span><h3>Change the goal.<br> Discover the skill.</h3><p>Within-workspace goals teach each hand to grasp and reorient. Goals across workspaces make handover necessary to complete the task.</p></div>
+        <div class="expert-panel" id="expert-panel-left" role="tabpanel" aria-labelledby="expert-tab-left">
+          <div class="video-frame"><video data-src="assets/experts/left.mp4" poster="assets/experts/left.jpg" controls muted loop playsinline preload="none" width="1280" height="900" aria-label="Left-workspace expert simulation demonstration"></video></div>
+          <div class="expert-caption"><h4>Left-workspace expert</h4><p>Grasp and manipulate objects toward goals in the left workspace.</p></div>
+        </div>
+        <div class="expert-panel" id="expert-panel-handover" role="tabpanel" aria-labelledby="expert-tab-handover" hidden>
+          <div class="video-frame"><video data-src="assets/experts/handover.mp4" poster="assets/experts/handover.jpg" controls muted loop playsinline preload="none" width="1280" height="920" aria-label="Cross-workspace expert simulation demonstration"></video></div>
+          <div class="expert-caption"><h4>Cross-workspace expert</h4><p>Transfer a held object to the opposite workspace, coordinating contact and release.</p></div>
+        </div>
+        <div class="expert-panel" id="expert-panel-right" role="tabpanel" aria-labelledby="expert-tab-right" hidden>
+          <div class="video-frame"><video data-src="assets/experts/right.mp4" poster="assets/experts/right.jpg" controls muted loop playsinline preload="none" width="1280" height="900" aria-label="Right-workspace expert simulation demonstration"></video></div>
+          <div class="expert-caption"><h4>Right-workspace expert</h4><p>Grasp and manipulate objects toward goals in the right workspace.</p></div>
+        </div>
       </div>
       <div class="method-panel" id="method-1" role="tabpanel" aria-labelledby="stage-1" hidden>
-        <div class="method-diagram"><div class="flow-vertical"><div class="expert-row"><span>Left expert</span><span>Handover expert</span><span>Right expert</span></div><span class="flow-arrow" aria-hidden="true">↓</span><div class="flow-box">Pool of terminal states</div><span class="flow-arrow" aria-hidden="true">↓</span><div class="flow-box accent-box">Refine each succeeding expert</div></div><div class="diagram-footer">Learn from where the preceding expert actually ends</div></div>
-        <div class="method-explanation"><span class="overline">Transition-aware refinement</span><h3>Make behaviors<br> fit together.</h3><p>Each expert continues training from states produced by its predecessors, preparing it for the hand and object configurations it will encounter at transitions.</p></div>
+        <div class="method-diagram"><div class="flow-vertical"><div class="expert-row"><span>Left expert</span><span>Cross-workspace expert</span><span>Right expert</span></div><span class="flow-arrow" aria-hidden="true">↓</span><div class="flow-box">Pool of terminal states</div><span class="flow-arrow" aria-hidden="true">↓</span><div class="flow-box accent-box">Refine each succeeding expert</div></div><div class="diagram-footer">Start from predecessor end states</div></div>
+        <div class="method-explanation"><span class="overline">Transition-aware refinement</span><h3>Refine behavior transitions</h3><ul class="method-points"><li><strong>Start from predecessor end states</strong> to practice transitions.</li><li><strong>Keep the original goals and reward</strong> while refining each expert.</li></ul></div>
       </div>
       <div class="method-panel" id="method-2" role="tabpanel" aria-labelledby="stage-2" hidden>
-        <div class="method-diagram"><div class="flow-vertical"><div class="expert-row"><span>π<sub>L</sub></span><span>π<sub>H</sub></span><span>π<sub>R</sub></span></div><span class="flow-arrow" aria-hidden="true">↓</span><div class="distill-label">DAgger + reinforcement learning</div><span class="flow-arrow" aria-hidden="true">↓</span><div class="flow-box accent-box unified-policy">π<sub>U</sub><small>One unified policy</small></div></div><div class="diagram-footer">Individual expert scenes + composition scenes</div></div>
-        <div class="method-explanation"><span class="overline">Unified-policy distillation</span><h3>Three experts.<br> One controller.</h3><p>Distillation preserves specialist behaviors while reinforcement learning helps the unified policy execute transitions and concurrent two-object manipulation.</p></div>
+        <div class="method-diagram"><div class="flow-vertical"><div class="expert-row"><span>π<sub>L</sub></span><span>π<sub>H</sub></span><span>π<sub>R</sub></span></div><span class="flow-arrow" aria-hidden="true">↓</span><div class="distill-label">DAgger + reinforcement learning</div><span class="flow-arrow" aria-hidden="true">↓</span><div class="flow-box accent-box unified-policy">π<sub>U</sub><small>One unified policy</small></div></div><div class="diagram-footer">Transfer · End-to-end tasks · Two-object manipulation</div></div>
+        <div class="method-explanation"><span class="overline">Unified-policy distillation</span><h3>Distill one policy</h3><ul class="method-points"><li><strong>DAgger + reinforcement learning</strong> combine the refined experts.</li><li><strong>Train on transfer and two-object scenes</strong> to learn behavior composition.</li><li><strong>Deploy one unified policy.</strong></li></ul></div>
       </div>
       <div class="method-panel" id="method-3" role="tabpanel" aria-labelledby="stage-3" hidden>
-        <div class="method-diagram"><div class="flow-vertical"><div class="expert-row"><span>VR object goals</span><span>Human video</span></div><span class="flow-arrow" aria-hidden="true">↓</span><div class="flow-box">Desired 6-DoF object poses</div><span class="flow-arrow" aria-hidden="true">↓</span><div class="flow-box accent-box">One policy → two arms & hands</div></div><div class="diagram-footer">Object pose feedback closes the control loop</div></div>
-        <div class="method-explanation"><span class="overline">Zero-shot sim-to-real</span><h3>Command objects.<br> Coordinate hands.</h3><p>Provide desired object poses through VR or extract waypoints from human video. The policy tracks those goals on real hardware, without task-specific fine-tuning.</p></div>
+        <div class="method-diagram"><div class="flow-vertical"><div class="expert-row"><span>VR object goals</span><span>Human video</span></div><span class="flow-arrow" aria-hidden="true">↓</span><div class="flow-box">Desired 6-DoF object poses</div><span class="flow-arrow" aria-hidden="true">↓</span><div class="flow-box accent-box">One policy → two arms & hands</div></div><div class="diagram-footer">Closed-loop object tracking</div></div>
+        <div class="method-explanation"><span class="overline">Zero-shot sim-to-real</span><h3>Follow object trajectories</h3><ul class="method-points"><li><strong>VR or human video</strong> provides object trajectories.</li><li><strong>One or two objects</strong> are controlled by the same policy.</li><li><strong>No task-specific fine-tuning</strong> on real hardware.</li></ul></div>
       </div>
-      <p class="small-note">Two Franka Research 3 arms · Two 22-DoF Sharpa Wave hands · Policy at 60 Hz</p>
     </section>
 
     <section id="results" class="section" aria-labelledby="results-title">

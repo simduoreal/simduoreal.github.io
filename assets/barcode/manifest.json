@@ -1,0 +1,38 @@
+[
+  {
+    "source": "C0238.MP4",
+    "asset": "brush.mp4",
+    "poster": "brush.jpg",
+    "label": "Black brush"
+  },
+  {
+    "source": "C0245.MP4",
+    "asset": "clamp.mp4",
+    "poster": "clamp.jpg",
+    "label": "Folded tripod"
+  },
+  {
+    "source": "C0228.MP4",
+    "asset": "can.mp4",
+    "poster": "can.jpg",
+    "label": "Can"
+  },
+  {
+    "source": "C0227.MP4",
+    "asset": "bottle.mp4",
+    "poster": "bottle.jpg",
+    "label": "Tennis ball tube"
+  },
+  {
+    "source": "C0255.MP4",
+    "asset": "sponge-1.mp4",
+    "poster": "sponge-1.jpg",
+    "label": "Yellow brush 1"
+  },
+  {
+    "source": "C0266.MP4",
+    "asset": "sponge-2.mp4",
+    "poster": "sponge-2.jpg",
+    "label": "Yellow brush 2"
+  }
+]

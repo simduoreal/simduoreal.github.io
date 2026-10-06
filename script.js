@@ -2,9 +2,9 @@
   'use strict';
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const taskData = {
-    assembly: {title: 'Two hands, one precise fit.', description: 'Acquire a peg and a block, transfer when needed, then coordinate both hands to align and insert.', count: 15, label: 'Real-world peg insertion demonstration'},
-    scanning: {title: 'Bring the barcode into view.', description: 'Pick up and reorient the brush, passing it between hands to present its barcode to the scanner.', count: 15, label: 'Real-world barcode scanning demonstration'},
-    cleaning: {title: 'A coordinated pair of tools.', description: 'Acquire the brush and dustpan, transfer the brush, then coordinate the two objects through a sweeping motion.', count: 16, label: 'Real-world brush and dustpan cleaning demonstration'},
+    assembly: {media: 'assembly-different', title: 'Two hands, one precise fit.', description: 'Pick up the peg and block from different workspaces, then align and insert.', count: 15, label: 'Real-world peg insertion demonstration'},
+    scanning: {title: 'Bring the barcode into view.', description: 'Pick up and reorient different objects to present their barcodes to the scanner.', count: 15, label: 'Real-world barcode scanning demonstration'},
+    cleaning: {media: 'cleaning-different', title: 'A coordinated pair of tools.', description: 'Pick up the brush and dustpan from different workspaces, then coordinate a sweeping motion.', count: 16, label: 'Real-world brush and dustpan cleaning demonstration'},
     cooking: {title: 'Keep one steady. Move the other.', description: 'Stabilize the pan with one hand while the other moves the spatula through the prescribed cooking motion.', count: 15, label: 'Real-world pan and spatula cooking demonstration'}
   };
 
@@ -28,6 +28,31 @@
   }
 
   const taskVideo = document.getElementById('task-video');
+  const objectSelector = document.getElementById('barcode-objects');
+  const objectButtons = [...objectSelector.querySelectorAll('[data-object]')];
+  let selectedObject = objectButtons[0];
+  let activeTask = 'scanning';
+  const taskSpeeds = {scanning: 1, assembly: 1, cleaning: 2, cooking: 2};
+  function setTaskMedia(src, poster, label) {
+    if (taskVideo.getAttribute('src') === src) return;
+    pauseAutomatically(taskVideo);
+    taskVideo.poster = poster;
+    taskVideo.src = src;
+    taskVideo.setAttribute('aria-label', label);
+    taskVideo.load();
+    manuallyPaused.delete(taskVideo);
+    playWhenVisible(taskVideo);
+  }
+  function showBarcodeObject() {
+    const slug = selectedObject.dataset.object;
+    document.getElementById('barcode-object-label').textContent = `Video ${objectButtons.indexOf(selectedObject) + 1} of ${objectButtons.length} · ${selectedObject.textContent}`;
+    setTaskMedia(`assets/barcode/${slug}.mp4`, `assets/barcode/${slug}.jpg`, `Barcode scanning: ${selectedObject.textContent}`);
+  }
+  objectButtons.forEach(button => button.addEventListener('click', () => {
+    selectedObject = button;
+    objectButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    showBarcodeObject();
+  }));
   const compactGallery = window.matchMedia('(max-width: 760px)');
   const syncGalleryOrientation = () => document.querySelector('.task-tabs').setAttribute('aria-orientation', compactGallery.matches ? 'horizontal' : 'vertical');
   compactGallery.addEventListener('change', syncGalleryOrientation);
@@ -35,16 +60,18 @@
   wireTabs(document.querySelector('.task-tabs'), tab => {
     const name = tab.dataset.task;
     const data = taskData[name];
-    const changed = !taskVideo.getAttribute('src').endsWith(`/${name}.mp4`);
-    if (changed) {
-      pauseAutomatically(taskVideo);
-      taskVideo.poster = `assets/${name}.jpg`;
-      taskVideo.src = `assets/${name}.mp4`;
-      taskVideo.setAttribute('aria-label', data.label);
-      taskVideo.load();
-      manuallyPaused.delete(taskVideo);
-      playWhenVisible(taskVideo);
+    if (name !== activeTask) {
+      const speedState = speedSections.get(taskVideo.closest('section'));
+      taskSpeeds[activeTask] = speedState.rate;
+      activeTask = name;
+      speedState.rate = taskSpeeds[name];
+      taskVideo.defaultPlaybackRate = speedState.rate;
+      taskVideo.playbackRate = speedState.rate;
+      updateSpeedControls(speedState);
     }
+    objectSelector.hidden = name !== 'scanning';
+    if (name === 'scanning') showBarcodeObject();
+    else setTaskMedia(`assets/${data.media || name}.mp4`, `assets/${data.media || name}.jpg`, data.label);
     document.getElementById('task-title').textContent = data.title;
     document.getElementById('task-description').textContent = data.description;
     document.getElementById('task-count').replaceChildren(document.createTextNode(String(data.count)), Object.assign(document.createElement('span'), {textContent: '/20'}));
@@ -55,8 +82,14 @@
     document.querySelectorAll('.method-panel').forEach(panel => { panel.hidden = panel.id !== tab.getAttribute('aria-controls'); });
   });
 
+  wireTabs(document.querySelector('.expert-tabs'), tab => {
+    document.querySelectorAll('.expert-panel').forEach(panel => {
+      panel.hidden = panel.id !== tab.getAttribute('aria-controls');
+      if (panel.hidden) panel.querySelectorAll('video').forEach(pauseAutomatically);
+    });
+  });
+
   // Load and play videos as they enter view, keeping offscreen clips paused.
-  const overview = document.getElementById('overview-video');
   const inView = new Set();
   const manuallyPaused = new Set();
   const automaticPauses = new WeakSet();
@@ -166,10 +199,20 @@
   // One speed per section, shared by any companion clips. Reuse the same files.
   const speedSections = new Map();
   videos.forEach(video => {
+    // The teaser has per-clip speeds and labels baked into the approved edit.
+    if (video.dataset.fixedSpeed === 'true') return;
     const section = video.closest('section');
-    if (!speedSections.has(section)) speedSections.set(section, {rate: 1, videos: [], controls: []});
+    if (!speedSections.has(section)) speedSections.set(section, {rate: 1, videos: [], controls: [], badges: []});
     const state = speedSections.get(section);
     state.videos.push(video);
+    const sourceSpeed = Number(video.dataset.sourceSpeed) || 1;
+    const speedBadge = document.createElement('span');
+    speedBadge.className = 'video-speed-badge';
+    speedBadge.dataset.sourceSpeed = String(sourceSpeed);
+    speedBadge.textContent = `${state.rate * sourceSpeed}×`;
+    speedBadge.setAttribute('aria-label', `Playback speed: ${state.rate * sourceSpeed} times actual speed`);
+    state.badges.push(speedBadge);
+    video.parentElement.append(speedBadge);
     const controls = document.createElement('div');
     controls.className = 'video-speed-controls';
     controls.setAttribute('role', 'group');
@@ -180,9 +223,9 @@
     for (const rate of [0.5, 1, 2]) {
       const button = document.createElement('button');
       button.type = 'button';
-      button.textContent = `${rate}×`;
+      button.textContent = `${rate * sourceSpeed}×`;
       button.dataset.rate = String(rate);
-      button.setAttribute('aria-label', `${rate} times playback speed`);
+      button.setAttribute('aria-label', `${rate * sourceSpeed} times actual speed`);
       button.setAttribute('aria-pressed', String(rate === state.rate));
       button.addEventListener('click', () => {
         state.rate = rate;
@@ -191,7 +234,7 @@
           clip.playbackRate = rate;
         });
         updateSpeedControls(state);
-        status.textContent = `Section playback speed: ${rate} times`;
+        status.textContent = `Playback speed: ${rate * sourceSpeed} times actual speed`;
       });
       controls.append(button);
     }
@@ -214,6 +257,11 @@
     });
   });
   function updateSpeedControls(state) {
+    state.badges.forEach(badge => {
+      const actualRate = state.rate * Number(badge.dataset.sourceSpeed);
+      badge.textContent = `${actualRate}×`;
+      badge.setAttribute('aria-label', `Playback speed: ${actualRate} times actual speed`);
+    });
     state.controls.forEach(controls => {
       controls.querySelectorAll('button').forEach(button => {
         button.setAttribute('aria-pressed', String(Number(button.dataset.rate) === state.rate));
@@ -254,9 +302,6 @@
     });
     video.addEventListener('play', () => { manuallyPaused.delete(video); });
     observer.observe(video);
-  });
-  overview.addEventListener('timeupdate', () => {
-    document.getElementById('reel-task').textContent = ['Assembly', 'Barcode scanning', 'Cleaning', 'Cooking'][Math.min(3, Math.floor(overview.currentTime / 5))];
   });
   function syncPlayback() {
     videos.forEach(video => {

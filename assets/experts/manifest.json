@@ -1,0 +1,17 @@
+[
+  {
+    "asset": "left.mp4",
+    "source": "left_grid_5x3_intro.mp4",
+    "processing": "1280px wide H.264, source aspect ratio and timing preserved, silent, fast-start metadata"
+  },
+  {
+    "asset": "handover.mp4",
+    "source": "handover_grid_3x3_intro.mp4",
+    "processing": "1280px wide H.264, source aspect ratio and timing preserved, silent, fast-start metadata"
+  },
+  {
+    "asset": "right.mp4",
+    "source": "right_grid_5x3_intro.mp4",
+    "processing": "1280px wide H.264, source aspect ratio and timing preserved, silent, fast-start metadata"
+  }
+]

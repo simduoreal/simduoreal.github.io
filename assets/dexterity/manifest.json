@@ -54,30 +54,11 @@
     "crop": null
   },
   {
-    "asset": "dexterity/pregrasp-1.mp4",
-    "poster": "dexterity/pregrasp-1.jpg",
-    "slide": 31,
-    "source": "barcode/barcode_1.MP4",
-    "start_seconds": 8.969277381896973,
-    "end_seconds": 11.80014419555664,
-    "crop": "right 60% of frame"
-  },
-  {
-    "asset": "dexterity/pregrasp-2.mp4",
-    "poster": "dexterity/pregrasp-2.jpg",
-    "slide": 31,
-    "source": "barcode/barcode_2.MP4",
-    "start_seconds": 1.0130666494369507,
-    "end_seconds": 6.910639762878418,
-    "crop": "right 60% of frame"
-  },
-  {
-    "asset": "dexterity/pregrasp-3.mp4",
-    "poster": "dexterity/pregrasp-3.jpg",
-    "slide": 31,
-    "source": "barcode/barcode_3.MP4",
-    "start_seconds": 0.0,
-    "end_seconds": 5.732577800750732,
-    "crop": "right 60% of frame"
+    "asset": "dexterity/pregrasp-manipulation.mp4",
+    "poster": "dexterity/pregrasp-manipulation.jpg",
+    "source": "C0175.MP4",
+    "start_seconds": 0,
+    "end_seconds": 7.611,
+    "crop": null
   }
 ]

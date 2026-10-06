@@ -28,5 +28,23 @@
     "asset": "cleaning.mp4",
     "source": "f890c7f991d6714b35883627e9e3e40a.MP4",
     "processing": "1280px wide, 30fps, no audio; source timing preserved"
+  },
+  {
+    "asset": "assembly-different.mp4",
+    "source": "SimDuoReal_demo/assembly.MP4",
+    "processing": "Full recording, 1280px wide, 30fps, silent; source timing preserved",
+    "initial_arrangement": "Objects in different workspaces"
+  },
+  {
+    "asset": "cleaning-different.mp4",
+    "source": "SimDuoReal_demo/clean.MP4",
+    "processing": "Full recording, 1280px wide, 30fps, silent; source timing preserved",
+    "initial_arrangement": "Objects in different workspaces"
+  },
+  {
+    "asset": "overview.mp4",
+    "source": "Section01_videos/SimDuoReal_teaser_v7_highlights.mp4",
+    "processing": "Approved v7 teaser copied unchanged; 31.067s, 1280x720, 30fps, silent. Task and per-clip playback speeds baked in.",
+    "poster": "overview.jpg"
   }
 ]
