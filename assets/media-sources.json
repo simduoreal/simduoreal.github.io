@@ -43,8 +43,8 @@
   },
   {
     "asset": "overview.mp4",
-    "source": "Section01_videos/SimDuoReal_teaser_v7_highlights.mp4",
-    "processing": "Approved v7 teaser copied unchanged; 31.067s, 1280x720, 30fps, silent. Task and per-clip playback speeds baked in.",
+    "source": "Personal website/videos/simduoreal-overview-no-task-handovers.mp4",
+    "processing": "21.967s montage: barcode handover, assembly insertion, barcode handover, cleaning sweep, barcode handover, cooking. Assembly peg handover and cleaning brush handover removed. Existing per-clip speeds retained; 1280x720, 30fps, silent.",
     "poster": "overview.jpg"
   }
 ]
